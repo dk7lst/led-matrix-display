@@ -123,13 +123,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseEffect.cpp" />
+    <ClCompile Include="src\CrossedLinesEffect.cpp" />
     <ClCompile Include="src\FrameBuffer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\SerialProtocol.cpp" />
+    <ClCompile Include="src\TransparencyEffect.cpp" />
+    <ClCompile Include="src\VuMeterEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseEffect.h" />
+    <ClInclude Include="src\CrossedLinesEffect.h" />
     <ClInclude Include="src\FrameBuffer.h" />
     <ClInclude Include="src\SerialProtocol.h" />
+    <ClInclude Include="src\TransparencyEffect.h" />
+    <ClInclude Include="src\VuMeterEffect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

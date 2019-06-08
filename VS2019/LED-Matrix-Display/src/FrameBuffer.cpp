@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include <windows.h>
 #include "FrameBuffer.h"
 
 FrameBuffer::FrameBuffer() {
@@ -20,4 +19,13 @@ bool FrameBuffer::packToBuffer(BYTE *pBuf, int size) const {
   if(size < FRAME_BUFFER_SIZE) return false;
   for(int i = 0; i < FRAME_BUFFER_SIZE; ++i) pBuf[i] = (m_ImageBuf[i * 2 + 1] << 4) | m_ImageBuf[i * 2];
   return true;
+}
+
+void FrameBuffer::copyFrom(const FrameBuffer *pOther) {
+  memcpy(m_ImageBuf, pOther->m_ImageBuf, IMAGE_BUFFER_SIZE);
+}
+
+void FrameBuffer::mergeFrom(const FrameBuffer *pOther, byte transcolor) {
+  for(int i = 0; i < IMAGE_BUFFER_SIZE; ++i)
+    if(pOther->m_ImageBuf[i] != transcolor) m_ImageBuf[i] = pOther->m_ImageBuf[i];
 }

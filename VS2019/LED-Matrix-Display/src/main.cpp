@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <conio.h>
 #include <assert.h>
-#include <windows.h>
-#include "FrameBuffer.h"
+#include "CrossedLinesEffect.h"
+#include "VuMeterEffect.h"
+#include "TransparencyEffect.h"
 #include "SerialProtocol.h"
 
 int main() {
@@ -16,33 +17,23 @@ int main() {
     return 1;
   }
 
+#if 0
   puts("Waiting...");
-  Sleep(5000); // Arduino rebootet beim Verbinden, daher warten bis der Selbsttest fertig ist.
+  Sleep(5000); // Wait for Arduino to rebootet on connect
+#endif
+
   puts("Starting...");
 
-  FrameBuffer img;
-  int phase = 0, vu[2] = {0, 0}, vuMax[2] = {0, 2};
-  while(!_kbhit()) {
-    img.clear();
-    if(phase % 15 == 0) {
-      for(int i = 0; i < 2; ++i) vu[i] = vuMax[i] = max(vu[i], img.PIXEL_X / 2 + rand() % (img.PIXEL_X / 2));
-    }
-    for(int y = 0; y < img.PIXEL_Y; ++y) {
-      for(int x = 0; x < img.PIXEL_X; ++x) {
-        // Schräge Linien im Hintergrund:
-        if((x - y + phase) % 15 == 0) img.setPixel(x, y, img.mkColor(1, 0));
-        if((x + y - phase) % 15 == 0) img.setPixel(x, y, img.mkColor(0, 1));
+  CrossedLinesEffect crossedlines;
+  VuMeterEffect vumeters;
+  TransparencyEffect trans;
+  trans.push_back(&crossedlines);
+  trans.push_back(&vumeters);
 
-        // VU-Meter:
-        if(x < vu[0] && y >= 1 && y <= 2) img.setPixel(x, y, img.mkColor(3 - x * 4 / img.PIXEL_X, x * 4 / img.PIXEL_X));
-        if(x < vu[1] && y >= 4 && y <= 5) img.setPixel(x, y, img.mkColor(3 - x * 4 / img.PIXEL_X, x * 4 / img.PIXEL_X));
-      }
-      if(y >= 1 && y <= 2) img.setPixel(vuMax[0], y, img.RED);
-      if(y >= 4 && y <= 5) img.setPixel(vuMax[1], y, img.RED);
-    }
-    for(int i = 0; i < 2; ++i) if(vu[i] > 0) --vu[i];
-    sport.sendFrame(&img);
-    ++phase;
+  int frame = 0;
+  while(!_kbhit()) {
+    trans.renderFrame(frame++);
+    sport.sendFrame(&trans);
   }
 
   return 0;

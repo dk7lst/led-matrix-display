@@ -1,5 +1,7 @@
 #pragma once
 
+#include <windows.h>
+
 // Class for an image using the complete display size.
 class FrameBuffer {
 public:
@@ -21,6 +23,12 @@ public:
 
   virtual void clear();
   virtual bool packToBuffer(BYTE *pBuf, int size) const;
+  virtual void copyFrom(const FrameBuffer *pOther);
+  virtual void mergeFrom(const FrameBuffer *pOther, byte transcolor = BLACK);
+
+  virtual inline const byte *getBuffer() const {
+    return m_ImageBuf;
+  }
 
   virtual inline void setPixel(int x, int y, byte color) {
     assert(x >= 0 && x < PIXEL_X && y >= 0 && y < PIXEL_Y && color >= 0 && color <= 0xF);
