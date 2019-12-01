@@ -1,19 +1,19 @@
 // Pin-Belegung: https://www.arduino.cc/en/Hacking/PinMapping168
 
-// Digital Pin 00 (PORTD.0): Serial Rx
-// Digital Pin 01 (PORTD.1): Serial Tx
+// Digital Pin 00 (PORTD.0): Serial Rx (serieller Port zum USB-Host)
+// Digital Pin 01 (PORTD.1): Serial Tx (serieller Port zum USB-Host)
 // Digital Pin 02 (PORTD.2): DATA0: Daten-Leitung zu den Schieberegistern für ROT
-// Digital Pin 03 (PORTD.3): Daten-Leitung zu den Schieberegistern für GRÜN
+// Digital Pin 03 (PORTD.3): DATA1: Daten-Leitung zu den Schieberegistern für GRÜN
 // Digital Pin 04 (PORTD.4): SCK: Clock-Signal zum Weiterschieben des Schiebe-Registers
 // Digital Pin 05 (PORTD.5): RCX: Clock-Signal um Schiebe-Register in Output-Latches zu übernehmen
 // Digital Pin 06 (PORTD.6): REMO: Low-Active-Signal der Fernbedienung. Beim Drücken einer FB-Taste erscheinen hier kurze Bursts.) Eingang! (Optional)
-// Digital Pin 07 (PORTD.7): O0: Zeilen-Ausgang Zeile 1 (oberste) (über Widerstand!)
-// Digital Pin 08 (PORTB.0): O1: Zeilen-Ausgang Zeile 2 (über Widerstand!)
-// Digital Pin 09 (PORTB.1): O2: Zeilen-Ausgang Zeile 3 (über Widerstand!)
-// Digital Pin 10 (PORTB.2): O3: Zeilen-Ausgang Zeile 4 (über Widerstand!)
-// Digital Pin 11 (PORTB.3): O4: Zeilen-Ausgang Zeile 5 (über Widerstand!)
-// Digital Pin 12 (PORTB.4): O5: Zeilen-Ausgang Zeile 6 (über Widerstand!)
-// Digital Pin 13 (PORTB.5): O6: Zeilen-Ausgang Zeile 7 (unterste) (über Widerstand!)
+// Digital Pin 07 (PORTD.7): O0: Zeilen-Treiber für Zeile 1 einschalten (oberste) (über Widerstand!)
+// Digital Pin 08 (PORTB.0): O1: Zeilen-Treiber für Zeile 2 einschalten (über Widerstand!)
+// Digital Pin 09 (PORTB.1): O2: Zeilen-Treiber für Zeile 3 einschalten (über Widerstand!)
+// Digital Pin 10 (PORTB.2): O3: Zeilen-Treiber für Zeile 4 einschalten (über Widerstand!)
+// Digital Pin 11 (PORTB.3): O4: Zeilen-Treiber für Zeile 5 einschalten (über Widerstand!)
+// Digital Pin 12 (PORTB.4): O5: Zeilen-Treiber für Zeile 6 einschalten (über Widerstand!)
+// Digital Pin 13 (PORTB.5): O6: Zeilen-Treiber für Zeile 7 einschalten (unterste) (über Widerstand!)
 // GND nicht vergessen!
 
 // Für Performance-Messung Digital Pin 06 (PORTD.6) setzen solange CPU in Timer-ISR ist.
