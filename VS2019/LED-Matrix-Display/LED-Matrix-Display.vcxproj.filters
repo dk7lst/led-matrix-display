@@ -32,6 +32,9 @@
     <ClCompile Include="src\TransparencyEffect.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\NetworkProtocol.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FrameBuffer.h">
@@ -50,6 +53,9 @@
       <Filter>Quelldateien</Filter>
     </ClInclude>
     <ClInclude Include="src\TransparencyEffect.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NetworkProtocol.h">
       <Filter>Quelldateien</Filter>
     </ClInclude>
   </ItemGroup>

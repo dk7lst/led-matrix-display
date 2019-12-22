@@ -6,16 +6,24 @@
 #include "VuMeterEffect.h"
 #include "TransparencyEffect.h"
 #include "SerialProtocol.h"
+#include "NetworkProtocol.h"
+
+#define USE_NETWORK 1 // 0: USB-Serial, 1: UDP/IP
 
 int main() {
-  puts("LED-Matrix-Display 0.01");
+  puts("LED-Matrix-Display 0.10");
 
-  SerialProtocol sport;
-  int res = sport.open("COM4");
+#if USE_NETWORK
+  NetworkProtocol link;
+  link.open("192.168.0.147", 8000);
+#else
+  SerialProtocol link;
+  int res = link.open("COM4");
   if(res) {
     puts("ERROR opening serial port!");
     return 1;
   }
+#endif
 
 #if 0
   puts("Waiting...");
@@ -33,7 +41,8 @@ int main() {
   int frame = 0;
   while(!_kbhit()) {
     trans.renderFrame(frame++);
-    sport.sendFrame(&trans);
+    link.sendFrame(&trans);
+    Sleep(1000 / 60);
   }
 
   return 0;
