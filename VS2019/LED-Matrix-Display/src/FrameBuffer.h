@@ -22,7 +22,7 @@ public:
   virtual ~FrameBuffer();
 
   virtual void clear();
-  virtual bool packToBuffer(BYTE *pBuf, int size) const;
+  virtual bool packToBuffer(byte *pBuf, int size) const;
   virtual void copyFrom(const FrameBuffer *pOther);
   virtual void mergeFrom(const FrameBuffer *pOther, byte transcolor = BLACK);
 
